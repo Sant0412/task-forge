@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Forge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cookie&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">task Forge</h2>
+          <div
+            class="mode-toggle toggle-btn"
+            aria-label="Toggle dark mode"
+            title="dark/light mode"
+          ></div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <ul class="sidebar-list">
+            <li class="sidebar-item">
+              <a href="" class="sidebar-link">Add Task</a>
+            </li>
+
+            <li class="sidebar-item">
+              <a href="" class="sidebar-link">Today</a>
+            </li>
+
+            <li class="sidebar-item">
+              <a href="" class="sidebar-link">Upcoming</a>
+            </li>
+
+            <li class="sidebar-item">
+              <a href="" class="sidebar-link">Completed</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div
+        class="sidebar-toggle toggle-btn"
+        title="open/close sidebar"
+        aria-label="Toggle sidebar"
+      ></div>
+    </div>
+
+    <!-- <main class="container">
+      <form class="task-form" method="post">
+        <input
+          type="text"
+          name="task"
+          id="task-input"
+          placeholder="Add new task"
+        />
+        <button type="submit">Add</button>
+      </form>
+      <div class="taskPanel"></div>
+    </main> -->
+
+    <!-- <footer><input type="date" name="date" id="task-date" /></footer> -->
+  </body>
+  <script src="src/mode-toggle.js"></script>
+  <script src="src/sidebar-toggle.js"></script>
+</html>
