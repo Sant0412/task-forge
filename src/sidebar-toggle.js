@@ -21,3 +21,10 @@ sidebarToggle.addEventListener("click", () => {
     sidebarToggle.innerHTML = closeIcon;
   }
 });
+
+//Update Date in svg icon
+
+const today = new Date();
+const formatted = today.getDate();
+
+document.querySelector("#dateText").textContent = formatted;
