@@ -8,12 +8,11 @@ const sunMode = `
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    stroke="orange"
+    stroke=currentColor
     stroke-width="2"
     width="30"
     height="30"
-  >
-    <path
+  ><path
       stroke-linecap="round"
       stroke-linejoin="round"
       d="M12 3v2m0 14v2m9-9h-2M5 12H3
@@ -30,12 +29,11 @@ const darkMode = `
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    stroke="#ddd"
+    stroke=currentColor
     stroke-width="2"
     width="30"
     height="30"
-  >
-    <path 
+  ><path 
       stroke-linecap="round" 
       stroke-linejoin="round" 
       d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75
@@ -59,8 +57,8 @@ if (savedMode) {
 
 //set icon according to current mode
 modeToggle.innerHTML = body.classList.contains("dark-mode")
-  ? darkMode
-  : sunMode;
+  ? sunMode
+  : darkMode;
 
 //Toggle on click
 modeToggle.addEventListener("click", (e) => {
@@ -71,10 +69,13 @@ function handleClick() {
   body.classList.toggle("dark-mode");
 
   if (body.classList.contains("dark-mode")) {
-    modeToggle.innerHTML = darkMode;
+    modeToggle.innerHTML = sunMode;
     localStorage.setItem("theme", "dark");
   } else {
-    modeToggle.innerHTML = sunMode;
+    modeToggle.innerHTML = darkMode;
     localStorage.setItem("theme", "light");
   }
+
+  // inform other modules that theme changed so they can reapply visual state
+  document.dispatchEvent(new Event("themechange"));
 }

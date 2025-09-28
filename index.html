@@ -12,9 +12,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/container.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
   </head>
   <body>
-    <div class="layout">
+    <div class="main-container">
       <aside class="sidebar">
         <div class="sidebar-header">
           <h2 class="sidebar-title">task Forge</h2>
@@ -27,7 +29,7 @@
 
         <nav class="sidebar-nav">
           <ul class="sidebar-list">
-            <li class="sidebar-item">
+            <li class="active sidebar-item">
               <span class="sidebar-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +47,7 @@
                   />
                 </svg>
               </span>
-              <a href="#add-task" class="sidebar-link">Add Task</a>
+              <a href="#add_task" class="sidebar-link">Add Task</a>
             </li>
 
             <li class="sidebar-item today">
@@ -68,7 +70,7 @@
                     x="12"
                     y="18"
                     id="dateText"
-                    font-size="9"
+                    font-size="8"
                     font-weight="100"
                     fill="none"
                     text-anchor="middle"
@@ -128,23 +130,87 @@
         title="open/close sidebar"
         aria-label="Toggle sidebar"
       ></div>
-    </div>
 
-    <!-- <main class="container">
-      <form class="task-form" method="post">
-        <input
-          type="text"
-          name="task"
-          id="task-input"
-          placeholder="Add new task"
-        />
-        <button type="submit">Add</button>
-      </form>
-      <div class="taskPanel"></div>
-    </main> -->
+      <main class="container">
+        <div id="add_task" class="selected container-item add">
+          <form class="task-form" method="post">
+            <input
+              class="full"
+              type="text"
+              name="task-title"
+              id="task-title"
+              placeholder="Revise biology notes daily at 7 pm"
+            />
+            <input
+              class="full"
+              type="text"
+              name="task-description"
+              id="task-description"
+              placeholder="Description"
+            />
+
+            <div class="actions">
+              <span id="date" class="action-btn"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  height="16"
+                  width="16"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z"
+                  />
+                </svg>
+                <p>Date</p>
+              </span>
+              <span id="priorityList" class="action-btn"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  height="16"
+                  width="16"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"
+                  />
+                </svg>
+                <p>Priority</p>
+              </span>
+            </div>
+
+            <hr />
+
+            <div class="task-form-btns">
+              <button type="reset" disabled>Cancel</button>
+              <button type="submit" disabled>Add task</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="today_task" class="container-item">
+          <div class="taskPanel">today_task</div>
+        </div>
+
+        <div id="upcoming_task" class="container-item">upcoming_task</div>
+
+        <div id="completed_task" class="container-item">completed_task</div>
+      </main>
+    </div>
 
     <!-- <footer><input type="date" name="date" id="task-date" /></footer> -->
   </body>
   <script src="src/mode-toggle.js"></script>
   <script src="src/sidebar-toggle.js"></script>
+  <script src="src/activeSection.js"></script>
+  <script src="src/formHandler.js"></script>
 </html>
