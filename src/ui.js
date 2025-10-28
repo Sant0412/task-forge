@@ -1,14 +1,15 @@
-//toggle between dark and light mode
+// Toggle between dark and light mode
 
 const modeToggle = document.querySelector(".mode-toggle");
 const body = document.querySelector("body");
 
-const sunMode = `
+// SVG icons for sun and moon
+const sun = `
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    stroke=currentColor
+    stroke="currentColor"
     stroke-width="2"
     width="30"
     height="30"
@@ -24,12 +25,12 @@ const sunMode = `
   </svg>
 `;
 
-const darkMode = `
+const moon = `
   <svg 
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    stroke=currentColor
+    stroke="currentColor"
     stroke-width="2"
     width="30"
     height="30"
@@ -45,22 +46,22 @@ const darkMode = `
   </svg>
 `;
 
-//Load saved mode on loading page
+// Load saved theme (if any) or system preference
 const savedMode = localStorage.getItem("theme");
 
 if (savedMode) {
+  // apply saved theme (dark if savedMode is 'moon')
   body.classList.toggle("dark-mode", savedMode === "dark");
 } else {
-  const prefersDark = window.matchMedia("prefers-color-scheme:dark").matches;
+  // apply system preference (dark or light)
+  const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
   body.classList.toggle("dark-mode", prefersDark);
 }
 
-//set icon according to current mode
-modeToggle.innerHTML = body.classList.contains("dark-mode")
-  ? sunMode
-  : darkMode;
+// Set icon based on current theme
+modeToggle.innerHTML = body.classList.contains("dark-mode") ? sun : moon;
 
-//Toggle on click
+// Toggle theme on button click
 modeToggle.addEventListener("click", (e) => {
   handleClick();
 });
@@ -68,14 +69,33 @@ modeToggle.addEventListener("click", (e) => {
 function handleClick() {
   body.classList.toggle("dark-mode");
 
+  // Update icon and save current theme
   if (body.classList.contains("dark-mode")) {
-    modeToggle.innerHTML = sunMode;
+    modeToggle.innerHTML = sun;
     localStorage.setItem("theme", "dark");
   } else {
-    modeToggle.innerHTML = darkMode;
+    modeToggle.innerHTML = moon;
     localStorage.setItem("theme", "light");
   }
 
-  // inform other modules that theme changed so they can reapply visual state
+  // Notify other components that theme has changed
   document.dispatchEvent(new Event("themechange"));
 }
+
+// Toggle between sidebar open and closed states
+
+const sidebar = document.querySelector(".sidebar");
+const sidebarToggle = document.querySelector(".sidebar-toggle");
+
+if (sidebarToggle) {
+  sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("closed");
+  });
+}
+
+//Update Date in svg icon
+
+const today = new Date();
+const formatted = today.getDate();
+
+document.querySelector("#dateText").textContent = formatted;
