@@ -11,6 +11,17 @@
       href="https://fonts.googleapis.com/css2?family=Cookie&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/container.css" />
     <link rel="stylesheet" href="css/responsive.css" />
@@ -29,7 +40,7 @@
 
         <nav class="sidebar-nav">
           <ul class="sidebar-list">
-            <li class="active sidebar-item">
+            <li class="active sidebar-item" data-section="add">
               <span class="sidebar-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -47,16 +58,16 @@
                   />
                 </svg>
               </span>
-              <a href="#add_task" class="sidebar-link">Add Task</a>
+              <a href="#add_section" class="sidebar-link">Add Task</a>
             </li>
 
-            <li class="sidebar-item today">
+            <li class="sidebar-item" data-section="today">
               <span class="sidebar-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1"
+                  stroke-width="1.5"
                   stroke="currentColor"
                   width="30"
                   height="30"
@@ -70,17 +81,17 @@
                     x="12"
                     y="18"
                     id="dateText"
-                    font-size="8"
+                    font-size="10"
                     font-weight="100"
                     fill="none"
                     text-anchor="middle"
                   ></text>
                 </svg>
               </span>
-              <a href="#today_task" class="sidebar-link">Today</a>
+              <a href="#today_section" class="sidebar-link">Today</a>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item" data-section="upcoming">
               <span class="sidebar-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -98,10 +109,10 @@
                   />
                 </svg>
               </span>
-              <a href="#upcoming_task" class="sidebar-link">Upcoming</a>
+              <a href="#upcoming_section" class="sidebar-link">Upcoming</a>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item" data-section="completed">
               <span class="sidebar-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -119,20 +130,37 @@
                   />
                 </svg>
               </span>
-              <a href="#completed_task" class="sidebar-link">Completed</a>
+              <a href="#completed_section" class="sidebar-link">Completed</a>
             </li>
           </ul>
         </nav>
       </aside>
 
       <div
-        class="sidebar-toggle toggle-btn"
+        class="toggle-btn sidebar-toggle"
         title="open/close sidebar"
         aria-label="Toggle sidebar"
-      ></div>
+      >
+        <svg
+          class="sidebar-toggle-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          stroke="currentColor"
+          height="30"
+          width="30"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"
+          />
+        </svg>
+      </div>
 
       <main class="container">
-        <div id="add_task" class="selected container-item add">
+        <div id="add_section" class="selected section">
           <form class="task-form" method="post">
             <input
               class="full"
@@ -150,6 +178,7 @@
             />
 
             <div class="actions">
+              <!-- <input type="text" id="myDatePicker" style="display: none" /> -->
               <span id="date" class="action-btn"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -197,20 +226,21 @@
           </form>
         </div>
 
-        <div id="today_task" class="container-item">
-          <div class="taskPanel">today_task</div>
+        <div id="today_section" class="section">
+          <div class="task-panel"></div>
         </div>
 
-        <div id="upcoming_task" class="container-item">upcoming_task</div>
+        <div id="upcoming_section" class="section">
+          <div class="task-panel"></div>
+        </div>
 
-        <div id="completed_task" class="container-item">completed_task</div>
+        <div id="completed_section" class="section">
+          <div class="task-panel"></div>
+        </div>
       </main>
     </div>
-
-    <!-- <footer><input type="date" name="date" id="task-date" /></footer> -->
   </body>
-  <script src="src/mode-toggle.js"></script>
-  <script src="src/sidebar-toggle.js"></script>
-  <script src="src/activeSection.js"></script>
-  <script src="src/formHandler.js"></script>
+  <script src="src/ui.js"></script>
+  <!-- <script type="module" src="src/activeSection.js"></script>
+  <script type="module" src="src/formHandler.js"></script> -->
 </html>

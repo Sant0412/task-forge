@@ -1,48 +1,53 @@
 /* ========== COLOR SYSTEM ========== */
 :root {
-  --bg: #f8f9fa;
+  --bg: #f2f0f8;
   --container-bg: #ffffff;
+  --highlight-background: #e3e0e8;
 
-  --text-primary: #212529;
-  --text-secondary: #495057;
-  --muted: #adb5bd;
-  --highlight-background: #f1f3f5;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --muted: #94a3b8;
 
-  --border: #dee2e6;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  --border: #d0d7de;
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 
-  --accent: #6366f1; /* Indigo – modern brand */
-  --success: #10b981; /* Emerald green */
-  --danger: #ef4444; /* Softer red */
-  --warning: #f59e0b; /* Warm amber */
-  --info: #0ea5e9; /* Sky blue */
+  --accent: #4f46e5;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --info: #0284c7;
 }
 
 .dark-mode {
-  --bg: #212529;
-  --container-bg: #2a2f34;
+  --bg: #181a1e;
+  --container-bg: #21242a;
+  --highlight-background: #2a2f34;
 
-  --text-primary: #f8f9fa;
-  --text-secondary: #ced4da;
-  --muted: #6c757d;
-  --highlight-background: #343a40;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --muted: #64748b;
 
-  --border: #495057;
+  --border: #334155;
   --shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
 
   --accent: #6366f1;
-  --success: #10b981;
+  --success: #22c55e;
   --danger: #ef4444;
-  --warning: #f59e0b;
-  --info: #0ea5e9;
+  --warning: #facc15;
+  --info: #38bdf8;
 }
 
 /* ========== GLOBAL ========== */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: "Inter", sans-serif;
   background: var(--bg);
   color: var(--text-primary);
@@ -58,19 +63,18 @@ body {
   padding: 2rem 1.5rem;
   background: var(--bg);
   box-shadow: var(--shadow);
-  transition: all 0.3s ease;
   height: 100vh;
-  min-width: 240px;
+  min-width: 260px;
   max-width: 260px;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
-.closed {
+.sidebar.closed {
   transform: translateX(-100%);
-  transition: transform 0.3s;
 }
 
 .sidebar-header {
@@ -88,30 +92,24 @@ body {
 }
 
 .mode-toggle {
-  margin-right: 3rem;
+  margin-right: 2.5rem;
 }
 
 .toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border-radius: 6px;
-  padding: 0.65rem;
-  height: 30px;
-  width: 30px;
-  margin-left: 1rem;
-  transition: background 0.5s;
+  height: 40px;
+  width: 40px;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.5s;
 }
 
 .toggle-btn:hover {
   background: var(--highlight-background);
-}
-
-.sidebar-toggle {
-  transform: rotate(1deg);
-  transition: transform 0.4s;
-}
-
-.sidebar.closed .sidebar-toggle {
-  transform: rotate(180deg);
 }
 
 .sidebar-nav {
@@ -141,51 +139,44 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebar-icon {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.sidebar-item:hover,
-.sidebar-item:active {
+.sidebar-icon svg {
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-item:hover {
   background: var(--highlight-background);
 }
 
 .sidebar-toggle {
   position: absolute;
   top: 32px;
-  left: 210px;
+  left: 200px;
   z-index: 20;
-  background: transparent;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: left 0.3s;
+  transform: rotate(1deg);
+  transition: all 0.5s;
 }
 
 .sidebar.closed + .sidebar-toggle {
-  left: 0;
+  transform: rotate(180deg);
+  top: 10px;
+  left: 10px;
 }
 
 .sidebar-item.active {
   background-color: var(--accent);
-  color: var(--text-primary);
-}
-
-.sidebar-item.active:hover {
-  background-color: var(--accent);
 }
 
 .sidebar-item.active .sidebar-link {
-  color: #fff;
+  color: var(--bg);
 }
 
 .sidebar-item.active .sidebar-icon svg {
-  stroke: #fff; /* Ensures icon also turns visible on accent background */
+  stroke: var(--bg); /* Ensures icon also turns visible on accent background */
 }

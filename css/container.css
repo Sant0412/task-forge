@@ -23,24 +23,13 @@
   max-width: 100vw;
 }
 
-/* Responsive for small screens */
-@media (max-width: 700px) {
-  .container {
-    margin-left: 0;
-    padding: 1rem;
-    border-radius: 0;
-    box-shadow: none;
-    max-width: 100vw;
-  }
-}
-
 /*========== FORM ========== */
 
-.container-item {
+.section {
   display: none;
 }
 
-.container-item.selected {
+.section.selected {
   display: block;
   background-color: var(--bg);
   max-width: 700px;
@@ -153,6 +142,16 @@ hr {
 button:disabled {
   opacity: 0.5;
 }
+
+/* ======== Date and time calender ======== */
+
+/* #date {
+  position: relative;
+}
+
+#myDatePicker {
+  position: absolute;
+} */
 
 /* ======== Dialog Box =========*/
 

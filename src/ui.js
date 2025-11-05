@@ -1,9 +1,9 @@
-// Toggle between dark and light mode
-
-const modeToggle = document.querySelector(".mode-toggle");
+const sidebar = document.querySelector(".sidebar");
 const body = document.querySelector("body");
+const modeToggle = document.querySelector(".mode-toggle");
+const sidebarToggle = document.querySelector(".sidebar-toggle");
 
-// SVG icons for sun and moon
+// SVG icons
 const sun = `
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -46,56 +46,88 @@ const moon = `
   </svg>
 `;
 
-// Load saved theme (if any) or system preference
+// ========== THEME SETUP ==========
 const savedMode = localStorage.getItem("theme");
+const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+const currentTheme = savedMode || (prefersDark ? "dark" : "light");
 
-if (savedMode) {
-  // apply saved theme (dark if savedMode is 'moon')
-  body.classList.toggle("dark-mode", savedMode === "dark");
-} else {
-  // apply system preference (dark or light)
-  const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
-  body.classList.toggle("dark-mode", prefersDark);
-}
+body.classList.toggle("dark-mode", currentTheme === "dark");
+modeToggle.innerHTML = currentTheme === "dark" ? sun : moon;
 
-// Set icon based on current theme
-modeToggle.innerHTML = body.classList.contains("dark-mode") ? sun : moon;
-
-// Toggle theme on button click
-modeToggle.addEventListener("click", (e) => {
-  handleClick();
-});
+modeToggle.addEventListener("click", handleClick);
 
 function handleClick() {
   body.classList.toggle("dark-mode");
-
-  // Update icon and save current theme
-  if (body.classList.contains("dark-mode")) {
-    modeToggle.innerHTML = sun;
-    localStorage.setItem("theme", "dark");
-  } else {
-    modeToggle.innerHTML = moon;
-    localStorage.setItem("theme", "light");
-  }
-
-  // Notify other components that theme has changed
+  const isDark = body.classList.contains("dark-mode");
+  modeToggle.innerHTML = isDark ? sun : moon;
+  localStorage.setItem("theme", isDark ? "dark" : "light");
   document.dispatchEvent(new Event("themechange"));
 }
 
-// Toggle between sidebar open and closed states
-
-const sidebar = document.querySelector(".sidebar");
-const sidebarToggle = document.querySelector(".sidebar-toggle");
-
-if (sidebarToggle) {
+// ========== SIDEBAR TOGGLE ==========
+if (sidebar && sidebarToggle) {
   sidebarToggle.addEventListener("click", () => {
     sidebar.classList.toggle("closed");
   });
 }
 
-//Update Date in svg icon
+// ========== DATE UPDATE ==========
+const dateText = document.querySelector("#dateText");
+if (dateText) dateText.textContent = new Date().getDate();
 
-const today = new Date();
-const formatted = today.getDate();
+// ========== ACTIVE SECTION ==========
+if (sidebar) {
+  sidebar.addEventListener("click", (e) => {
+    const li = e.target.closest(".sidebar-item");
+    if (!li) return;
 
-document.querySelector("#dateText").textContent = formatted;
+    document
+      .querySelectorAll(".sidebar-item.active")
+      .forEach((item) => item.classList.remove("active"));
+
+    li.classList.add("active");
+
+    const activeSection = li.dataset.section;
+    const activeDiv = document.getElementById(`${activeSection}_section`);
+
+    document
+      .querySelectorAll(".section.selected")
+      .forEach((section) => section.classList.remove("selected"));
+
+    if (activeDiv) activeDiv.classList.add("selected");
+
+    if (activeSection === "add") {
+      console.log(activeSection);
+    } else {
+      console.log("else case");
+      console.log(activeSection);
+    }
+  });
+}
+
+// toggle b/w set & remove disabled attribute to action buttons of form
+const taskInput = document.getElementById("task-title");
+const formBtns = document.querySelectorAll(".task-form-btns button");
+
+taskInput.addEventListener("input", (e) => {
+  if (e.target.value !== "") {
+    formBtns.forEach((btn) => btn.removeAttribute("disabled"));
+  } else {
+    formBtns.forEach((btn) => btn.setAttribute("disabled", "disabled"));
+  }
+});
+
+// const actionBtn = document.querySelector(".actions");
+// const dateInput = document.getElementById("date");
+// const datePicker = document.getElementById("myDatePicker");
+
+// const date = flatpickr("#myDatePicker", {
+//   dateFormat: "Y-m-d",
+//   onChange: function (selectedDates, dateStr) {
+//     dateInput.innerHTML = `<p>${dateStr}</p>`;
+//   },
+// });
+
+// dateInput.addEventListener("click", (e) => {
+//   date.open();
+// });
